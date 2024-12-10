@@ -99,6 +99,69 @@
 // export default SecondPage;
 
 
+// import React, { useState } from "react";
+// import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+// import { useRouter } from "expo-router";
+// import { useTabContext } from "../../../context/TabContext";
+
+// const SecondPage = () => {
+//   const router = useRouter();
+//   const { setActiveTab } = useTabContext();
+//   const [selectedOption, setSelectedOption] = useState("existing");
+
+//   const handleSelection = () => {
+//     if (selectedOption === "existing") {
+//       setActiveTab("Login");
+//     } else {
+//       setActiveTab("Register");
+//     }
+//     router.push("/Auth");
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.header}>Choose Your Role</Text>
+//       <View style={styles.radioContainer}>
+//         <TouchableOpacity
+//           style={styles.radioButton}
+//           onPress={() => setSelectedOption("existing")}
+//         >
+//           <Text style={styles.radioText}>
+//             {selectedOption === "existing" ? "✓" : " "} Existing Member
+//           </Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity
+//           style={styles.radioButton}
+//           onPress={() => setSelectedOption("new")}
+//         >
+//           <Text style={styles.radioText}>
+//             {selectedOption === "new" ? "✓" : " "} New Member
+//           </Text>
+//         </TouchableOpacity>
+//       </View>
+//       <TouchableOpacity style={styles.button} onPress={handleSelection}>
+//         <Text style={styles.buttonText}>Proceed</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: { flex: 1, justifyContent: "center", alignItems: "center" },
+//   header: { fontSize: 20, fontWeight: "bold", marginBottom: 20 },
+//   radioContainer: { flexDirection: "column", marginBottom: 30 },
+//   radioButton: { flexDirection: "row", alignItems: "center", marginBottom: 10 },
+//   radioText: { fontSize: 16 },
+//   button: { backgroundColor: "blue", padding: 10, borderRadius: 5 },
+//   buttonText: { color: "white", fontWeight: "bold" },
+// });
+
+// export default SecondPage;
+
+
+// final 
+
+
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
@@ -123,37 +186,98 @@ const SecondPage = () => {
       <Text style={styles.header}>Choose Your Role</Text>
       <View style={styles.radioContainer}>
         <TouchableOpacity
-          style={styles.radioButton}
+          style={[
+            styles.radioButton,
+            selectedOption === "existing" && styles.radioButtonSelected,
+          ]}
           onPress={() => setSelectedOption("existing")}
         >
-          <Text style={styles.radioText}>
-            {selectedOption === "existing" ? "✓" : " "} Existing Member
+          <Text
+            style={[
+              styles.radioText,
+              selectedOption === "existing" && styles.radioTextSelected,
+            ]}
+          >
+            Existing Member
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.radioButton}
+          style={[
+            styles.radioButton,
+            selectedOption === "new" && styles.radioButtonSelected,
+          ]}
           onPress={() => setSelectedOption("new")}
         >
-          <Text style={styles.radioText}>
-            {selectedOption === "new" ? "✓" : " "} New Member
+          <Text
+            style={[
+              styles.radioText,
+              selectedOption === "new" && styles.radioTextSelected,
+            ]}
+          >
+            New Member
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleSelection}>
-        <Text style={styles.buttonText}>Proceed</Text>
+      <TouchableOpacity style={styles.proceedButton} onPress={handleSelection}>
+        <Text style={styles.proceedButtonText}>Proceed</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  header: { fontSize: 20, fontWeight: "bold", marginBottom: 20 },
-  radioContainer: { flexDirection: "column", marginBottom: 30 },
-  radioButton: { flexDirection: "row", alignItems: "center", marginBottom: 10 },
-  radioText: { fontSize: 16 },
-  button: { backgroundColor: "blue", padding: 10, borderRadius: 5 },
-  buttonText: { color: "white", fontWeight: "bold" },
+  container: {
+    flex: 1,
+    backgroundColor: "#f8f9fa",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#343a40",
+    marginBottom: 30,
+    textAlign: "center",
+  },
+  radioContainer: {
+    width: "100%",
+    marginBottom: 40,
+  },
+  radioButton: {
+    width: "100%",
+    padding: 15,
+    marginVertical: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ced4da",
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+  },
+  radioButtonSelected: {
+    backgroundColor: "#007bff",
+    borderColor: "#0056b3",
+  },
+  radioText: {
+    fontSize: 16,
+    color: "#495057",
+  },
+  radioTextSelected: {
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  proceedButton: {
+    width: "100%",
+    padding: 15,
+    borderRadius: 8,
+    backgroundColor: "#007bff",
+    alignItems: "center",
+  },
+  proceedButtonText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#ffffff",
+  },
 });
 
 export default SecondPage;
