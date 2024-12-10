@@ -93,6 +93,44 @@
 ///a tuh 
 
 
+// import { useEffect } from "react";
+// import { useRouter } from "expo-router";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// export default function Index() {
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     const checkAuth = async () => {
+//       try {
+//         const storedData = await AsyncStorage.getItem("userData");
+//         if (storedData) {
+//           const parsedData = JSON.parse(storedData);
+//           if (parsedData.isDetailsFilled) {
+//             router.replace("/tabs/Home");
+//           } else {
+//             router.replace("/screens/popup");
+//           }
+//         } else {
+//           // router.replace("/screens/SecondPage/SecondPage"); // Default route for unauthenticated users
+//           router.replace("/screens/FirstPage/FirstPage"); // Default route for unauthenticated users
+
+//         }
+//       } catch (error) {
+//         console.error("Error checking authentication:", error);
+//         router.replace("/Auth"); // Fallback to Auth page on error
+//       }
+//     };
+
+//     checkAuth();
+//   }, []);
+
+//   return null; // No UI needed; just redirect
+// }
+
+//final
+
+
 import { useEffect } from "react";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -103,27 +141,30 @@ export default function Index() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        // Retrieve stored user data from AsyncStorage
         const storedData = await AsyncStorage.getItem("userData");
         if (storedData) {
           const parsedData = JSON.parse(storedData);
+
+          // Check if user details are filled
           if (parsedData.isDetailsFilled) {
-            router.replace("/tabs/Home");
+            router.replace("/tabs/Home"); // Redirect to Home screen
           } else {
-            router.replace("/screens/popup");
+            router.replace("/screens/popup"); // Redirect to Popup screen
           }
         } else {
-          // router.replace("/screens/SecondPage/SecondPage"); // Default route for unauthenticated users
-          router.replace("/screens/FirstPage/FirstPage"); // Default route for unauthenticated users
-
+          // Redirect unauthenticated users to a default route
+          router.replace("/screens/FirstPage/FirstPage");
         }
       } catch (error) {
         console.error("Error checking authentication:", error);
-        router.replace("/Auth"); // Fallback to Auth page on error
+        // Redirect to Auth page as a fallback
+        router.replace("/Auth");
       }
     };
 
     checkAuth();
   }, []);
 
-  return null; // No UI needed; just redirect
+  return null; // No UI needed; this component is for redirection only
 }
